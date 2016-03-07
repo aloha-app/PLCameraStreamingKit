@@ -45,6 +45,9 @@ extern NSString *PLAudioComponentFailedToCreateNotification;
 /// @abstract 获取到摄像头原数据时的回调, 便于开发者做滤镜等处理
 - (CMSampleBufferRef)cameraStreamingSession:(PLCameraStreamingSession *)session cameraSourceDidGetSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 
+/// @abstract 获取到摄像头原数据时的回调, 返回 CVPixelbufferRef
+- (CVPixelBufferRef)pixelBufferFromCameraStreamingSession:(PLCameraStreamingSession *)session cameraSourceDidGetSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+
 @end
 
 /*!

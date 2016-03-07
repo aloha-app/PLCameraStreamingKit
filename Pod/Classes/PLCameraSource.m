@@ -415,7 +415,11 @@ AVCaptureVideoDataOutputSampleBufferDelegate
 #pragma mark - <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    if ([self.delegate respondsToSelector:@selector(cameraSource:didGetSampleBuffer:)]) {
+    CVPixelBufferRef pixelBuffer = NULL  ;
+    if ([self.delegate respondsToSelector:@selector(pixelBuffercameraSource:didGetSampleBuffer:)]) {
+        pixelBuffer = [self.delegate pixelBuffercameraSource:self didGetSampleBuffer:sampleBuffer];
+    }
+    if (pixelBuffer == NULL && [self.delegate respondsToSelector:@selector(cameraSource:didGetSampleBuffer:)]) {
         sampleBuffer = [self.delegate cameraSource:self didGetSampleBuffer:sampleBuffer];
     }
 }

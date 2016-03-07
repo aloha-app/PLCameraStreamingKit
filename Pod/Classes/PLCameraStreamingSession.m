@@ -324,6 +324,20 @@ PLStreamingSendingBufferDelegate
     return sampleBuffer;
 }
 
+-(CVPixelBufferRef)pixelBuffercameraSource:(PLCameraSource *)source didGetSampleBuffer:(CMSampleBufferRef)sampleBuffer {
+    CVPixelBufferRef pixelBuffer = NULL;
+    if ([self.delegate respondsToSelector:@selector(pixelBufferFromCameraStreamingSession:cameraSourceDidGetSampleBuffer:)]) {
+         pixelBuffer = [self.delegate pixelBufferFromCameraStreamingSession:self cameraSourceDidGetSampleBuffer:sampleBuffer];
+    }
+    
+    if (PLStreamStateConnected == self.streamingSession.streamState) {
+        [self.streamingSession pushPixelBuffer:pixelBuffer];
+    }
+
+    
+    return pixelBuffer;
+}
+
 #pragma mark - <PLMicrophoneSourceDelegate>
 
 - (void)microphoneSource:(PLMicrophoneSource *)source didGetAudioBuffer:(AudioBuffer *)buffer {

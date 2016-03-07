@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, PLCaptureDevicePosition) {
 
 @optional
 - (CMSampleBufferRef)cameraSource:(PLCameraSource *)source didGetSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+- (CVPixelBufferRef)pixelBuffercameraSource:(PLCameraSource *)source didGetSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 
 @end
 
